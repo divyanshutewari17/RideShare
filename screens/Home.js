@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './Logged/HomeScreen'
 import Search from './Logged/Search'
 import Profile from './Logged/Profile'
+import newRide from './Logged/newRide'
 const Tab = createBottomTabNavigator();
 const Home = ({navigation})=>{
     return(
@@ -37,6 +38,8 @@ const Home = ({navigation})=>{
              <Tab.Screen name="Home" component={HomeScreen} />
              <Tab.Screen name="Search" component={Search} />
              <Tab.Screen name="Profile" component={Profile} />
+             <Tab.Screen name="New Ride" component={newRide} />
+             
            </Tab.Navigator>
          </NavigationContainer>
     )
