@@ -28,7 +28,7 @@ const [pass, passInput]=useState('');
         onChangeText={(text)=> passInput(text)}
         mode= 'outlined'
       />
-      <Button style={styles.btn}  mode="contained">
+      <Button style={styles.btn}  mode="contained" onPress={()=>navigation.navigate('Home')}>
         Login
       </Button>
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
@@ -36,7 +36,7 @@ const [pass, passInput]=useState('');
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.forgotButton}
-        onPress={() => navigation?.navigate("SignUp")}
+        onPress={() => navigation.navigate("SignUp")}
       >
         <Text style={styles.navButtonText}>
           Don't have an acount? Create here

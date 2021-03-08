@@ -2,12 +2,39 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useState,Component} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView } from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
+
 const SignUpScreen =({ navigation }) => {
+  
+
 //state
-   const [email, emailInput]=useState("");
-   const [pass, passInput]=useState('');
+   const [email, setEmail]=useState('');
+   const [password, setPassword]=useState('');
+   const [phone, setPhone]=useState('')
+   const [confirm, setConfirm]=useState('')
+   
+   //require
    
 
+  function sendCred(){
+     if(password!=confirm){
+       alert("Passwords don't match")
+     }
+     else{
+      fetch("http://localhost:3000/signup",{
+        method:'POST',
+        mode:'no-cors',
+        headers:{
+          'Accept':'application/json',
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({
+         "email": email,
+         "password": password,
+         "phone": phone
+       })
+      })
+    }
+   }
   return (
     <View style={styles.container}>
      <KeyboardAvoidingView behavior="position">
@@ -18,7 +45,19 @@ const SignUpScreen =({ navigation }) => {
         marginLeft:18,marginRight:18}}
         theme={{colors:{primary:"blue"}}}
         value= {email}
-        onChangeText={(text)=> emailInput(text)}
+        
+        onChangeText={(text)=> setEmail(text)}
+        mode= 'outlined'
+        
+      />
+      <TextInput
+        label= "Phone"
+        style={{marginTop:20,
+        marginLeft:18,marginRight:18}}
+        theme={{colors:{primary:"blue"}}}
+        value= {phone}
+        
+        onChangeText={(text)=> setPhone(text)}
         mode= 'outlined'
         
       />
@@ -27,8 +66,8 @@ const SignUpScreen =({ navigation }) => {
         style={{marginTop:20,
         marginLeft:18,marginRight:18}}
         theme={{colors:{primary:"blue"}}}
-        value= {pass} 
-        onChangeText={(text)=> passInput(text)}
+        value= {password} 
+        onChangeText={(text)=> setPassword(text)}
         mode= 'outlined'
         
       />
@@ -37,15 +76,18 @@ const SignUpScreen =({ navigation }) => {
         style={{marginTop:20,
         marginLeft:18,marginRight:18}}
         theme={{colors:{primary:"blue"}}}
-        value= {pass} 
-        onChangeText={(text)=> passInput(text)}
+        value= {confirm} 
+        onChangeText={(text)=> setConfirm(text)}
         mode= 'outlined'
         
       />
       <Button 
       style={styles.btn}  
       mode="contained"
-      onPress={()=> sendCred()}>
+      onPress={()=> {
+        console.log(email)
+        console.log(password)
+      }}>
         Register
       </Button>
       
